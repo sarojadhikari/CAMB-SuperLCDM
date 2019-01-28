@@ -185,16 +185,13 @@ def make_library(cluster=False):
         ok, gfortran_version = check_gfortran(msg=not is_windows)
     if is_windows:
         COMPILER = "gfortran"
-        # note that TDM-GCC MingW 5.1 does not work due go general fortran bug.
-        # This works: http://sourceforge.net/projects/mingw-w64/?source=typ_redirect
-        # but need to use 32bit compiler to build 32 bit dll (contrary to what is implied)
         FFLAGS = "-shared -static -cpp -fopenmp -O3 -fmax-errors=4"
         if is32Bit: FFLAGS = "-m32 " + FFLAGS
         if not ok:
             print(
                 'WARNING: gfortran %s or higher not in path (if you just installed you may need to log off and on again).' %
                 gfortran_min)
-            print('         You can get a Windows gfortran build from http://sourceforge.net/projects/mingw-w64/')
+            print('         You can get a Windows gfortran build from https://sourceforge.net/projects/mingw-w64/')
             print('         (get the %s version to match this python installation)' % (('x86_64', 'i686')[is32Bit]))
             if is32Bit:
                 raise IOError('No 32bit Windows DLL provided, you need to build or use 64 bit python')

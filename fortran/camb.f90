@@ -150,6 +150,11 @@
             call lens_Cls(OutData)
         end if
 
+        OutData%CLData%Cl_lensed(:,1)=(1.0+OutData%CP%A0)*OutData%CLData%Cl_lensed(:,1)
+        OutData%CLData%Cl_lensed(:,2)=(1.0+OutData%CP%A0)*OutData%CLData%Cl_lensed(:,2)
+        OutData%CLData%Cl_lensed(:,3)=(1.0+OutData%CP%A0)*OutData%CLData%Cl_lensed(:,3)
+        OutData%CLData%Cl_lensed(:,4)=(1.0+OutData%CP%A0)*OutData%CLData%Cl_lensed(:,4)
+
         if (do_bispectrum .and. global_error_flag==0) &
             call GetBispectrum(OutData,OutData%CLData%CTransScal)
     end if

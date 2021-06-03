@@ -46,7 +46,7 @@
         State%CLData%Cl_lensed(:,3)=(1.0+State%CP%A0)*State%CLData%Cl_lensed(:,3)
         State%CLData%Cl_lensed(:,4)=(1.0+State%CP%A0)*State%CLData%Cl_lensed(:,4)
         ! for CPhiPhi lensing potential
-        State%CLData%Cl_scalar(:,C_Phi)=(1.0+State%CP%A0)*State%CLData%Cl_scalar(:,C_Phi)
+        State%CLData%Cl_scalar(:,4)=(1.0+State%CP%A0)*State%CLData%Cl_scalar(:,4)
         
         if (global_error_flag/=0) return
     end if

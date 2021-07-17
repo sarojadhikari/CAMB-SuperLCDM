@@ -41,13 +41,15 @@
         if (State%CP%DoLensing .and. global_error_flag==0) call lens_Cls(Cdata)
         ! saroj added May 23, 2021 for superlcdm A0, written separately
         ! for 1=TT, 2=EE, 3=BB, 4=TE for future possibility of separate A0 params
-        State%CLData%Cl_lensed(:,1)=(1.0+State%CP%A0)*State%CLData%Cl_lensed(:,1)
-        State%CLData%Cl_lensed(:,2)=(1.0+State%CP%A0)*State%CLData%Cl_lensed(:,2)
-        State%CLData%Cl_lensed(:,3)=(1.0+State%CP%A0)*State%CLData%Cl_lensed(:,3)
-        State%CLData%Cl_lensed(:,4)=(1.0+State%CP%A0)*State%CLData%Cl_lensed(:,4)
+        ! State%CLData%Cl_lensed(:,1)=(1.0+State%CP%A0)*State%CLData%Cl_lensed(:,1)
+        ! State%CLData%Cl_lensed(:,2)=(1.0+State%CP%A0)*State%CLData%Cl_lensed(:,2)
+        ! State%CLData%Cl_lensed(:,3)=(1.0+State%CP%A0)*State%CLData%Cl_lensed(:,3)
+        ! State%CLData%Cl_lensed(:,4)=(1.0+State%CP%A0)*State%CLData%Cl_lensed(:,4)
         ! for CPhiPhi lensing potential
-        State%CLData%Cl_scalar(:,4)=(1.0+State%CP%A0)*State%CLData%Cl_scalar(:,4)
-        
+        ! State%CLData%Cl_scalar(:,4)=(1.0+State%CP%A0)*State%CLData%Cl_scalar(:,4)
+
+        ! above code commented out on July 17, 2021 
+        ! now the effect of A0,eps is implemented in python code results.py
         if (global_error_flag/=0) return
     end if
 

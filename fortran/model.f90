@@ -166,6 +166,7 @@
 
         real(dl)  :: Alens = 1._dl !Unphysical rescaling parameter of the CMB lensing power
         real(dl)  :: A0 = 0._dl !Added by saroj May 23, 2021 for A0
+        real(dl)  :: eps = 0._dl !Added by saroj Jul 17, 2021 for eps (superlcdm scaling)
 
         integer   :: MassiveNuMethod = Nu_best
 

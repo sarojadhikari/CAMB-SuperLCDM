@@ -445,6 +445,8 @@ class CAMBdata(F2003Class):
         for spectrum in spectra:
             P[spectrum] = getattr(self, 'get_' + spectrum + '_cls')(lmax, CMB_unit=CMB_unit,
                                                                     raw_cl=raw_cl)
+        Ptotal = P
+        
         if (params is None) and (self.Params.A0 != 0.0):
             # do power spectrum calculation for ns as the spectral index (the current
             # value passed from cobaya is ns+eps)
@@ -473,8 +475,7 @@ class CAMBdata(F2003Class):
                                                                         CMB_unit=CMB_unit,
                                                                         raw_cl=raw_cl)
         
-        Ptotal = P2
-        Ptotal["total"] = P2["total"] + self.Params.A0 * P["total"]
+            Ptotal["total"] = P2["total"] + self.Params.A0 * P["total"]
         
         return Ptotal
 

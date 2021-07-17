@@ -445,7 +445,38 @@ class CAMBdata(F2003Class):
         for spectrum in spectra:
             P[spectrum] = getattr(self, 'get_' + spectrum + '_cls')(lmax, CMB_unit=CMB_unit,
                                                                     raw_cl=raw_cl)
-        return P
+        if (params is None) and (self.Params.A0 != 0.0):
+            # do power spectrum calculation for ns as the spectral index (the current
+            # value passed from cobaya is ns+eps)
+            
+            # for this in `cobaya.theories.camb.camb.calculate` set:
+            # `if (params.A0 != 0.0):
+            #      args["ns"] = args["ns] + params.eps
+            # before calling args.update(self.initial_power_args)
+            
+            ns2 = self.Params.InitPower.ns - self.Params.eps
+            As = self.Params.InitPower.As
+            self.Params.InitPower.set_params(As=As, ns=nsp)
+            
+            # recalculate the power spectra using the same transfer function
+            # but new spectral index (slightly different than recalculating everything
+            # but the difference is small for Planck ells -- double check if the 
+            # percentage difference is acceptable for you (this seems cobaya's default
+            # behaviour as well
+            
+            self.power_spectra_from_transfer()
+            
+            P2 = {}
+            
+            for sepctrum in spectra:
+                P2[spectrum] = getattr(self, 'get_' + spectrum + '_cls')(lmax,
+                                                                        CMB_unit=CMB_unit,
+                                                                        raw_cl=raw_cl)
+        
+        Ptotal = P2
+        Ptotal["total"] = P2["total"] + self.Params.A0 * P["total"]
+        
+        return Ptotal
 
     def get_cmb_correlation_functions(self, params=None, lmax=None, spectrum='lensed_scalar',
                                       xvals=None, sampling_factor=1):

@@ -466,7 +466,7 @@ class CAMBdata(F2003Class):
             # percentage difference is acceptable for you (this seems cobaya's default
             # behaviour as well
             
-            self.power_spectra_from_transfer()
+            self.power_spectra_from_transfer(silent=True)   # silent to suppress recalculate warning
             
             P2 = {}
             

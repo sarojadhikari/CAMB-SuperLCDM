@@ -458,7 +458,7 @@ class CAMBdata(F2003Class):
             
             ns2 = self.Params.InitPower.ns - self.Params.eps
             As = self.Params.InitPower.As
-            self.Params.InitPower.set_params(As=As, ns=nsp)
+            self.Params.InitPower.set_params(As=As, ns=ns2)
             
             # recalculate the power spectra using the same transfer function
             # but new spectral index (slightly different than recalculating everything

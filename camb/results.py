@@ -447,6 +447,11 @@ class CAMBdata(F2003Class):
                                                                     raw_cl=raw_cl)
         Ptotal = P
         
+        if (self.Params.eps == 0.0):
+            # no need to recalculate power spectra if eps = 0
+            Ptotal["total"] = (1.0 + self.Params.A0) * P["total"]
+            return Ptotal
+        
         if (params is None) and (self.Params.A0 != 0.0):
             # do power spectrum calculation for ns as the spectral index (the current
             # value passed from cobaya is ns+eps)

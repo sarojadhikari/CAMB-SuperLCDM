@@ -481,6 +481,10 @@ class CAMBdata(F2003Class):
                                                                         raw_cl=raw_cl)
         
             Ptotal["total"] = P2["total"] + self.Params.A0 * P["total"]
+            
+            # avoid negative EE spectra
+            # only happens for extreme values of eps and A0 that are excluded anyway
+            Ptotal["total"][:,1] = Ptotal["total"][:,1].clip(0)
         
         return Ptotal
 

@@ -333,7 +333,7 @@ class CAMBdata(F2003Class):
             CAMBdata_transferstopowers(byref(self))
             config.check_global_error()
 
-    def power_spectra_from_transfer(self, initial_power_params=None, silent=False):
+    def power_spectra_from_transfer(self, initial_power_params=None, silent=True):
         """
         Assuming :meth:`calc_transfers` or :meth:`calc_power_spectra` have already been used, re-calculate the
         power spectra using a new set of initial power spectrum parameters with otherwise the same cosmology.

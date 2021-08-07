@@ -538,7 +538,9 @@
     ! Added saroj May 23 for A0 paramter
     call Ini%Read('A0', P%A0)
     ! Added by saroj Jul 17 for eps parameter
-    call Ini%Read('eps', P%eps)   
+    call Ini%Read('eps', P%eps)
+    ! Added by saroj Aug 7 for A0phi parameter
+    call Ini%Read('A0phi', P%A0phi)   
 
     call P%Reion%ReadParams(Ini)
     call P%InitPower%ReadParams(Ini)

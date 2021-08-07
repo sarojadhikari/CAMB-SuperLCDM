@@ -220,6 +220,7 @@ class CAMBparams(F2003Class):
         ("Alens", c_double, "non-physical scaling amplitude for the CMB lensing spectrum power"),
         ("A0", c_double, "super-lcdm A0 scaling"),
         ("eps", c_double, "super-lcdm eps factor"),
+        ("A0phi", c_double, "super-lcdm A0phi scaling"),
         ("MassiveNuMethod", c_int, {"names": ["Nu_int", "Nu_trunc", "Nu_approx", "Nu_best"]}),
         ("DoLateRadTruncation", c_bool,
          "If true, use smooth approx to radiation perturbations after decoupling on small"
@@ -410,7 +411,7 @@ class CAMBparams(F2003Class):
                       mnu=0.06, nnu=constants.default_nnu, YHe: Optional[float] = None, meffsterile=0.0,
                       standard_neutrino_neff=constants.default_nnu, TCMB=constants.COBE_CMBTemp,
                       tau: Optional[float] = None, zrei: Optional[float] = None, deltazrei: Optional[float] = None,
-                      Alens=1.0, bbn_predictor: Union[None, str, bbn.BBNPredictor] = None, theta_H0_range=(10, 100), A0=0.0, eps=0.0):
+                      Alens=1.0, bbn_predictor: Union[None, str, bbn.BBNPredictor] = None, theta_H0_range=(10, 100), A0=0.0, eps=0.0, A0phi=0.0):
         r"""
         Sets cosmological parameters in terms of physical densities and parameters (e.g. as used in Planck analyses).
         Default settings give a single distinct neutrino mass eigenstate, by default one neutrino with mnu = 0.06eV.
@@ -474,6 +475,7 @@ class CAMBparams(F2003Class):
         self.Alens = Alens
         self.A0 = A0
         self.eps = eps
+        self.A0phi = A0phi
 
         neutrino_mass_fac = constants.neutrino_mass_fac * (constants.COBE_CMBTemp / TCMB) ** 3
 

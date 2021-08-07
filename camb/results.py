@@ -449,7 +449,11 @@ class CAMBdata(F2003Class):
         
         if (self.Params.eps == 0.0):
             # no need to recalculate power spectra if eps = 0
-            Ptotal["total"] = (1.0 + self.Params.A0) * P["total"]
+            for spectrum in spectra:
+                if spectrum == "lens_potential":
+                    Ptotal[spectrum] = (1.0 + self.Params.A0phi) * P[spectrum]
+                else:
+                    Ptotal[spectrum] = (1.0 + self.Params.A0) * P[spectrum]
             return Ptotal
         
         if (params is None) and (self.Params.A0 != 0.0):
@@ -480,11 +484,14 @@ class CAMBdata(F2003Class):
                                                                         CMB_unit=CMB_unit,
                                                                         raw_cl=raw_cl)
         
-                Ptotal[spectrum] = P2[spectrum] + self.Params.A0 * P[spectrum]
+                if spectrum == "lens_potential":
+                    Ptotal[spectrum] = P2[spectrum] + self.Params.A0phi * P[spectrum]
+                else:
+                    Ptotal[spectrum] = P2[spectrum] + self.Params.A0 * P[spectrum]
             
-                # avoid negative EE spectra
-                # only happens for extreme values of eps and A0 that are excluded anyway
-                Ptotal[spectrum][:,1] = Ptotal[spectrum][:,1].clip(0)
+            # avoid negative EE spectra
+            # only happens for extreme values of eps and A0 that are excluded anyway
+            Ptotal["total"][:,1] = Ptotal["total"][:,1].clip(0)
         
         return Ptotal
 

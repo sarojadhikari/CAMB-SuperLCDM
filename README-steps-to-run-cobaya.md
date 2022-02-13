@@ -13,5 +13,16 @@ the following steps can be followed to run MCMC chains using `cobaya`.
          (see cobaya documentation) 
    * `-o chains/slcdm*` means that the chains and other output from `cobaya` is put in the chains subfolder in the
          current folder with the base name `slcdm*` (`*` should replace with what you desire the base name of the chains to be)
+         
+         
+## Trouble with libgfortran?
+
+Anaconda libgfortran trouble if anaconda is installed can be solved by preloading the fortran library from the system as:
+
+```bash
+  export LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libgfortran.so.5
+```
+
+on linux.
        
     

@@ -38,6 +38,11 @@ This document describes the changes made to `camb` and `cobaya` to run with `A0`
           if (params.A0 != 0):
             args["ns"]=args["ns"]+params.eps
           ```
+          right before 
+          ```python
+          args.update(self.initial_power_args)
+          ```
+          The ```if (self.external_primordial_pk)``` branch is for external implementation of primordial power spectrum such as say oscillating feature in the primordial power spectrum that cobaya allows to implement as well. But currently we only use the usual power law with spectral index; so, this location is okay as long as we don't use `external_primordial_pk`.
      * In `camb.results.get_cmb_power_spectra`, add:
        ```python
           Ptotal = P
